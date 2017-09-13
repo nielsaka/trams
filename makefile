@@ -6,6 +6,12 @@ all: paper
 
 paper: paper/article.pdf
 
+init: 
+	make -t
+	rm paper/article.pdf
+	make -t presentation
+	rm presentations/presentation.pdf
+
 paper/article.pdf: paper/article.tex
 	latexmk -cd -pdf -deps-out=$(PAPER_DEP) $<
 	# exclude all non-project-specific dependencies
