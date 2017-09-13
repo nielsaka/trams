@@ -1,18 +1,29 @@
+PAPER_DIR = paper
+PAPER_DEP = paper/.paper.d
+.PHONY: init
+
 all: paper
 
-paper: 2_paper/article.pdf
+paper: paper/article.pdf
 
-2_paper/article.pdf: 2_paper/article.tex 2_paper/lit_all.bib
-	cd 2_paper; latexmk -pdf article.tex
+paper/article.pdf: paper/article.tex
+	latexmk -cd -pdf -deps-out=$(PAPER_DEP) $<
+	# exclude all non-project-specific dependencies
+	sed 's/article.pdf/paper\/article.pdf/' $(PAPER_DEP) > tmp.d
+	sed -n '1,2p' tmp.d > $(PAPER_DEP)
+	grep 'paper/inputs/' tmp.d >> $(PAPER_DEP)
+	rm tmp.d 
+	perl -pi -e 's/.*(?=paper\\/inputs)//' $(PAPER_DEP)
+
+paper/inputs/%.tex: code/%.R
+	cd code; Rscript $*.R
 	
-# Figs/fig1.pdf: R/R_fig.R 
-	# cd R;R CMD BATCH '--args eps=FALSE' R_fig.R
-
-# Figs/fig1.eps: R/R_fig.R 
-	# cd R;R CMD BATCH '--args eps=TRUE' R_fig.R
-
 clean: 
-	rm -f *.aux *.bbl *.blg *.log *.bak *~ *.Rout */*~ */*.Rout */*.aux */*.log */*.bbl
+	rm -f *.aux *.bbl *.blg *.log *.bak *~ *.Rout */*~ */*.Rout */*.aux \
+	*/*.log	*/*.bbl
 
 cleanall: 
-	\rm -f *.aux *.bbl *.blg *.log *.pdf *.bak *~ *.Rout */*~ */*.Rout */*.pdf */*.aux */*.log
+	\rm -f *.aux *.bbl *.blg *.log *.pdf *.bak *~ *.Rout */*~ */*.Rout \
+	*/*.pdf	*/*.aux */*.log
+
+-include $(PAPER_DEP)
