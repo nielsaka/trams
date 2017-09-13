@@ -1,0 +1,1 @@
+copy  "..\..\lit\lit_all.bib" "2_paper\lit_all.bib"

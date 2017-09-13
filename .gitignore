@@ -1,0 +1,19 @@
+.Rproj.user
+.Rhistory
+.RData
+*.pdf
+*.html
+*.Rproj
+
+# Exclude latex help files
+**.aux
+**.log
+**.bbl
+**.blg
+
+# Exclude make / latexmk help files
+**.fdb_latexmk
+**.fls
+
+# Exclude jabref backup
+**.bak

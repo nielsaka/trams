@@ -1,0 +1,667 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Stand 13.1.2014
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Most of the commands are taken from
+%% "Notation in Econometrics: a proposal for a standard"
+%% by Karim Abadir and Jan R. Magnus,
+%% The Econometrics Journal (2002), 5, 76-90.
+%% Other commands are adapted from Stefan Rameseder, Niels Aka
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Typical Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{ dsfont }
+%\usepackage[colorlinks,citecolor=black,linkcolor=black]{hyperref}
+%\usepackage[authoryear]{natbib}
+\usepackage{amsfonts}
+\usepackage{changebar}
+\usepackage[dvips]{graphicx}
+\usepackage{fancyhdr}   % fancy header and footer
+\usepackage{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{makeidx}
+\usepackage{mathtools}   % zum Zeichnen von schnellen Graphiken und \mathrlap
+\usepackage{mathrsfs}
+\usepackage[ngerman]{babel}
+\usepackage{nicefrac}    % schöne Brüche in den Zeilen
+\usepackage[normalem]{ulem}
+\usepackage{stmaryrd}
+\usepackage{t1enc}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage{yfonts}
+\usepackage{cite}
+\usepackage{bm}
+\usepackage{bbm} % for indicator function \mathbbm{1}
+\usepackage{setspace}
+\usepackage[usenames]{color}
+\usepackage{framed}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+% \usepackage{pstricks}  % zum Zeichnen von schnellen Graphiken
+%\usepackage{tabularx} %abstandsabhängige Tabellen
+\newcommand{\new}[1]{{\color{red}#1}}
+\newcommand{\newoperator}[3]{\newcommand*{#1}{\mathop{#2}#3}}
+\newcommand{\renewoperator}[3]{\renewcommand*{#1}{\mathop{#2}#3}}
+% Für Aufzählungen
+\usepackage{paralist} %e.g. \begin{compactenum}[i)] but is rather compact
+\usepackage{enumitem} %e.g. \begin{enumerate}[label=\roman*)], nice for trivlist i.e. theorems
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% environments for definitions, lemmas, proposals, theorems, proofs
+% source: http://www.maths.tcd.ie/~dwilkins/LaTeXPrimer/Theorems.html
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%counting at chapter level. all have same counter.
+%\newtheorem{theorem}{Theorem}[chapter] 
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem{proposition}[theorem]{Proposition}
+%\newtheorem{corollary}[theorem]{Corollary}
+%\newtheorem{algorithm}{Algorithm}[chapter]
+% \newtheorem{design}{Design}[chapter}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{assumption}{Assumption}[chapter]
+
+\newtheorem{theorem}{Theorem}[section] 
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{algorithm}{Algorithm}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{assumption}{Assumption}[section]
+
+%\newenvironment{proof}[1][Proof]{\begin{trivlist}
+%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{discussion}[1][Discussion]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newenvironment{design}[2][Design]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1 #2}]}{\end{trivlist}}
+%\newenvironment{algorithm}[1][Algorithm]{\begin{trivlist}
+%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\renewcommand{\qedsymbol}{Q.E.D.}
+%\newcommand{\qed}{\nobreak \ifvmode \relax \else
+      %\ifdim\lastskip<1.5em \hskip-\lastskip
+      %\hskip1.5em plus0em minus0.5em \fi \nobreak
+      %\vrule height0.75em width0.5em depth0.25em\fi}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% symbols C,N,Q,R,Z for sets
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% symbols C,N,Q,R,Z for sets
+\newcommand{\SC}{\mathbb{C}}
+\newcommand{\SN}{\mathbb{N}}
+\newcommand{\SQ}{\mathbb{Q}}
+\newcommand{\SR}{\mathbb{R}}
+\newcommand{\SZ}{\mathbb{Z}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% timestamps
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\monthword}[1]{\ifcase#1\or Jan\or Feb\or M\"ar\or Apr\or Mai\or Jun\or Jul\or Aug\or Sep\or Okt\or Nov\or Dez\fi}
+\newcommand{\leadingzero}[1]{\ifnum #1<10 0\the#1\else\the#1\fi}             %%fügt bei 1 bis 9 eine führende Null an
+
+\newcommand{\todayI}{\the\year"~\leadingzero{\month}"~\leadingzero{\day}}    	%%YYYY-MM-DD
+\newcommand{\todayII}{\the\year\leadingzero{\month}\leadingzero{\day}}       	%%YYYYMMDD
+\newcommand{\todayIII}{\leadingzero{\day}/\leadingzero{\month}/\the\year}    	%%DD/MM/YYYY
+\newcommand{\todayIV}{\leadingzero{\day}.\leadingzero{\month}.\the\year}     	%%DD.MM.YYYY
+\newcommand{\todayV}{\the\day.\the\month.\the\year}                          	%%D.M.YYYY
+\newcommand{\todayVI}{\the\day.~\monthword{\the\month}. \the\year}           	%%D. MMM. YYYY
+\newcommand{\todayVII}{\leadingzero{\day}.~\monthword{\the\month}. \the\year}	%%DD. MMM. YYYY
+\newcommand{\todayVIII}{\monthword{\the\month}. \the\year}										%%DD. MMM. YYYY
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% calligraphic capital letters
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calJ}{\mathcal{J}}
+\newcommand{\calK}{\mathcal{K}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calV}{\mathcal{V}}
+\newcommand{\calW}{\mathcal{W}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calZ}{\mathcal{Z}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% bold lowercase and capital letters for vectors (v) and matrices (m)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\mA}{\bm A}
+\newcommand{\va}{\bm a}
+\newcommand{\mB}{\bm B}
+\newcommand{\vb}{\bm b}
+\newcommand{\mC}{\bm C}
+\newcommand{\vc}{\bm c}
+\newcommand{\mD}{\bm D}
+\newcommand{\vd}{\bm d}
+\newcommand{\mE}{\bm E}
+\newcommand{\ve}{\bm e}
+\newcommand{\mF}{\bm F}
+\newcommand{\vf}{\bm f}
+\newcommand{\mG}{\bm G}
+\newcommand{\vg}{\bm g}
+\newcommand{\mH}{\bm H}
+\newcommand{\vh}{\bm h}
+\newcommand{\mI}{\bm I}
+\newcommand{\vi}{\bm i}
+\newcommand{\mJ}{\bm J}
+\newcommand{\vj}{\bm j}
+\newcommand{\mK}{\bm K}
+\newcommand{\vk}{\bm k}
+\newcommand{\mL}{\bm L}
+\newcommand{\vl}{\bm l}
+\newcommand{\mM}{\bm M}
+\newcommand{\vm}{\bm m}
+\newcommand{\mN}{\bm N}
+\newcommand{\vn}{\bm n}
+\newcommand{\mO}{\bm O}
+\newcommand{\vo}{\bm o}
+\newcommand{\mP}{\bm P}
+\newcommand{\vp}{\bm p}
+\newcommand{\mQ}{\bm Q}
+\newcommand{\vq}{\bm q}
+\newcommand{\mR}{\bm R}
+\newcommand{\vr}{\bm r}
+\newcommand{\mS}{\bm S}
+\newcommand{\vs}{\bm s}
+\newcommand{\mT}{\bm T}
+\newcommand{\vt}{\bm t}
+\newcommand{\mU}{\bm U}
+\newcommand{\vu}{\bm u}
+\newcommand{\mV}{\bm V}
+\newcommand{\vv}{\bm v}
+\newcommand{\mW}{\bm W}
+\newcommand{\vw}{\bm w}
+\newcommand{\mX}{\bm X}
+\newcommand{\vx}{\bm x}
+\newcommand{\mY}{\bm Y}
+\newcommand{\vy}{\bm y}
+\newcommand{\mZ}{\bm Z}
+\newcommand{\vz}{\bm z}
+
+\newcommand{\vnull}{\bm 0}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% bold Greek lowercase letters for scalars
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\be}{\beta}
+\newcommand{\beh}{\hat{\vbeta}}
+\newcommand{\bet}{\tilde{\beta}}
+\newcommand{\muh}{\hat{\mu}}
+\newcommand{\mut}{\tilde{\mu}}
+\newcommand{\uh}{\hat{\vu}}
+\newcommand{\yh}{\hat{\vy}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% bold Greek lowercase letters for scalars
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\hbeta}{\hat{\beta}}
+\newcommand{\tbeta}{\tilde{\beta}}
+
+\newcommand{\muh}{\hat{\mu}}
+\newcommand{\mut}{\tilde{\mu}}
+\newcommand{\uh}{\hat{\vu}}
+\newcommand{\yh}{\hat{\vy}}
+\newcommand{\bbeta}{\mathbf{\beta}}
+
+\newcommand{\vbeta}{\mathbf \beta}
+\newcommand{\hvbeta}{\hat{\vbeta}}
+\newcommand{\tvbeta}{\tilde{\vbeta}}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% bold Greek lowercase letters for vectors (v)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\valpha}{\bm \alpha}
+\newcommand{\vbeta}{\bm \be}
+\newcommand{\vbeta}{\bm \beta}
+\newcommand{\vbetahat}{\bm \beh}
+
+\newcommand{\vgamma}{\bm \gamma}
+\newcommand{\vdelta}{\bm \delta}
+\newcommand{\vepsi}{\bm \epsi}
+\newcommand{\vvarepsilon}{\bm \varepsilon}
+\newcommand{\vzeta}{\bm \zeta}
+\newcommand{\veta}{\bm \eta}
+\newcommand{\vtheta}{\bm \theta}
+\newcommand{\viota}{\bm \iota}
+\newcommand{\vkappa}{\bm \kappa}
+\newcommand{\vlambda}{\bm \lambda}
+\newcommand{\vmu}{\bm \mu}
+\newcommand{\vnu}{\bm \nu}
+\newcommand{\vxi}{\bm \xi}
+\newcommand{\vpi}{\bm \pi}
+\newcommand{\vrho}{\bm \rho}
+\newcommand{\vsigma}{\bm \sigma}
+\newcommand{\vvarsigma}{\bm \varsigma}
+\newcommand{\vtau}{\bm \tau}
+\newcommand{\vupsilon}{\bm \upsilon}
+\newcommand{\vphi}{\bm \phi}
+\newcommand{\vvphi}{\bm \varphi}
+\newcommand{\vchi}{\bm \chi}
+\newcommand{\vpsi}{\bm \psi}
+\newcommand{\vomega}{\bm \omega}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% bold Greek capital letters for matrices (m)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\mGamma}{\bm \varGamma}
+\newcommand{\mDelta}{\bm \varDelta}
+\newcommand{\mTheta}{\bm \varTheta}
+\newcommand{\mLambda}{\bm \varLambda}
+\newcommand{\mXi}{\bm \varXi}
+\newcommand{\mPi}{\bm \varPi}
+\newcommand{\mSigma}{\bm \varSigma}
+\newcommand{\mUpsilon}{\bm \varUpsilon}
+\newcommand{\mPhi}{\bm \varPhi}
+\newcommand{\mPsi}{\bm \varPsi}
+\newcommand{\mOmega}{\bm \varOmega}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% roman letters in mathematics
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\rb}{\ensuremath{\mathrm{b}}}
+\newcommand{\rB}{\ensuremath{\mathrm{B}}}
+\newcommand{\rC}{\ensuremath{\mathrm{C}}}
+\newcommand{\rD}{\ensuremath{\mathrm{D}}}
+\newcommand{\rf}{\ensuremath{\mathrm{f}}}
+\newcommand{\rF}{\ensuremath{\mathrm{F}}}
+\newcommand{\rH}{\ensuremath{\mathrm{H}}}
+\newcommand{\rL}{\ensuremath{\mathrm{L}}}
+\newcommand{\rN}{\ensuremath{\mathrm{N}}}
+\newcommand{\rt}{\ensuremath{\mathrm{t}}}
+\newcommand{\rU}{\ensuremath{\mathrm{U}}}
+%for random vectors
+\newcommand{\rX}{\ensuremath{\mathrm{X}}}
+\newcommand{\rY}{\ensuremath{\mathrm{Y}}}
+
+\newcommand{\rGam}{\ensuremath{\mathrm{Gam}}}
+\newcommand{\rBeta}{\ensuremath{\mathrm{Beta}}}
+%
+\newcommand{\Bin}{\ensuremath{\mathrm{Bin}}}
+\newcommand{\eu}{\ensuremath{\mathrm{e}}}
+\newcommand{\iu}{\ensuremath{\mathrm{i}}}
+\newcommand{\LN}{\ensuremath{\mathrm{LN}}}
+\newcommand{\IN}{\ensuremath{\mathrm{IN}}}
+
+\newcommand{\Poi}{\ensuremath{\mathrm{Poi}}}
+%
+\newcommand{\ped}[1]{\ensuremath{_\mathrm{#1}}} %pedex
+\newcommand{\ap}[1]{\ensuremath{^\mathrm{#1}}} %apex
+\renewoperator{\Re}{\mathrm{Re}}{\nolimits}
+\renewoperator{\Im}{\mathrm{Im}}{\nolimits}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% letters for (partial) differentiation
+%\newcommand{\rd}{\ensuremath{\mathrm{d}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\newcommand{\rd}{\@ifnextchar^{\DIfF}{\DIfF^{}}}
+\def\DIfF^#1{%
+   \mathop{\mathrm{\mathstrut d}}%
+   \nolimits^{#1}\gobblespace}
+\def\gobblespace{\futurelet\diffarg\opspace}
+\def\opspace{%
+   \let\DiffSpace\!%
+   \ifx\diffarg(%
+   \let\DiffSpace\relax
+   \else
+   \ifx\diffarg[%
+   \let\DiffSpace\relax
+   \else
+   \ifx\diffarg\{%
+   \let\DiffSpace\relax
+   \fi\fi\fi\DiffSpace}
+\newcommand{\deriv}[3][]{\frac{\rd^{#1}#2}{\rd #3^{#1}}}
+\newcommand{\pderiv}[3][]{\frac{\partial^{#1}#2}{\partial #3^{#1}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% operatornames
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\E}{\operatorname{E}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Corr}{\operatorname{Corr}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\bias}{\operatorname{bias}}
+\newcommand{\col}{\operatorname{col}}
+\newcommand{\dg}{\operatorname{dg}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\etr}{\operatorname{etr}}
+\newoperator{\ip}{\mathrm{int}}{\nolimits}
+\newcommand{\kur}{\operatorname{kur}}
+\newcommand{\median}{\operatorname{med}}
+\newcommand{\MSE}{\operatorname{MSE}}
+\newcommand{\plim}{\operatorname{plim}}
+\newcommand{\rk}{\operatorname{rk}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\tr}{\operatorname{tr}}
+\renewcommand{\vec}{\operatorname{vec}}
+\newcommand{\vech}{\operatorname{vech}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\Mor}{\operatorname{Mor}}
+\newcommand{\Abb}{\operatorname{Abb}}
+\newcommand{\Lin}{\operatorname{Lin}}
+\newcommand{\Real}{\operatorname{Re}}
+\newcommand{\Image}{\operatorname{Im}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\ggT}{\operatorname{ggT}}
+\newcommand{\Ker}{\operatorname{Ker}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Frac}{\operatorname{Frac}}
+\newcommand{\Spec}{{\operatorname{Spec}\,}}
+\newcommand{\Proj}{{\operatorname{Proj}\,}}
+\newcommand{\codim}{\operatorname{codim}}
+\newcommand{\kon}{\operatorname{kon}}
+\newcommand{\res}{\operatorname{res}}
+\newcommand{\kor}{\operatorname{kor}}
+\newcommand{\ad}{\operatorname{ad}}
+\renewcommand{\vec}{\operatorname{vec}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% other definitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\distr}{\sim}
+\newcommand{\adistr}{\stackrel{a}{\distr}}
+\newcommand{\diff}{\Delta}
+%\newcommand{\diff}{\bigtriangleup}
+\newcommand{\fdiff}{\diff_{\rf}}
+\newcommand{\bdiff}{\diff_{\rb}}
+%\mathchardef\varepsilon="010F
+%\mathchardef\epsilon="0122
+%\mathchardef\eps="010F
+\newcommand{\eps}{\epsilon}
+\newcommand{\epsi}{\varepsilon}
+%
+\newcommand{\longto}{\longrightarrow}
+\newcommand{\pto}{\stackrel{p}{\longrightarrow}}
+\newcommand{\dto}{\stackrel{d}{\longrightarrow}}
+\newcommand{\wto}{\stackrel{w}{\longrightarrow}}
+%
+\newcommand{\Infmat}{\bm\calI}
+\newcommand{\Hesmat}{\bm\calH}
+\newcommand{\bcdot}{\raisebox{1pt}{\textbf{\large .}}}
+%
+\newcommand{\vones}{\bm\imath}
+\newcommand{\vzeros}{\boldsymbol{0}}
+\newcommand{\mZeros}{\mathbf{O}}
+%
+% additional commands
+\newcommand{\interior}[1]{\overset{\circ}{#1}}
+\newcommand{\mzeros}{\mZeros}
+\newcommand{\mply}{\cdot}
+\newcommand{\widebar}{\overline}
+\newcommand{\bin}{\Bin}
+\newcommand{\Po}{\Poi}
+\newcommand{\e}{\eu}% exponential e
+\newcommand{\EE}[1]{\E\left(#1\right)}
+\newcommand{\prob}[1]{\P\left(#1\right)}
+
+\newcommand{\prob}[1]{\mathbb P \left(#1\right)}
+\newcommand{\probnull}[1]{\mathbb P_0 \left(#1\right)}
+\newcommand{\proba}{\mathbb{P}}
+\newcommand\given[1][]{\:#1\vert\:}
+\newcommand\conprob[2]{\mathbb P  \left( #1 \given #2 \right)} % P, \P, \Pr, \mathbb P
+
+\newcommand{\MAX}[1]{\max\left\{#1\right\}}
+\newcommand{\MIN}[1]{\min\left\{#1\right\}}
+
+% additional commands
+\newcommand{\E}[1]{\operatorname{E}[#1]}
+\newcommand{\Var}[1]{\operatorname{Var}\left(#1\right)}
+\newcommand{\Cov}[1]{\operatorname{Cov}\left(#1\right)}
+\newcommand{\Corr}[1]{\operatorname{Corr}\left(#1\right)}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Own abbreviations and commands:
+
+\newcommand{\beq}{\begin{equation}}
+\newcommand{\eeq}{\end{equation}}
+\newcommand{\bal}{\begin{align*}}
+\newcommand{\eal}{\end{align*}}
+
+\newcommand{\bsmat}{\left(\begin{smallmatrix}}
+\newcommand{\esmat}{\end{smallmatrix}\right)}
+
+\newcommand{\bmat}{\begin{pmatrix}}
+\newcommand{\emat}{\end{pmatrix}}
+
+
+% Aufgaben als sections
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\aufgabe}[1]{\section{#1}
+\vspace*{-0.4 cm}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pfeile
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\ra}{\longrightarrow}
+\newcommand{\Ra}{\Longrightarrow}
+\newcommand{\la}{\longleftarrow}
+\newcommand{\La}{\Longleftarrow}
+\newcommand{\LR}{\Longleftrightarrow}
+\newcommand{\lr}{\longleftrightarrow}
+\newcommand{\PRa}{\overset{P}{\longrightarrow}}
+\newcommand{\PLa}{\overset{P}{\longleftarrow}}
+\newcommand{\DRa}{\overset{d}{\longrightarrow}}
+\newcommand{\DLa}{\overset{d}{\longleftarrow}}
+\newcommand{\ARa}{\overset{a.s.}{\longrightarrow}}
+\newcommand{\ALa}{\overset{a.s.}{\longleftarrow}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Limiten und andere Mengenoperatoren
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\limni}{\underset{n \to \infty}{\lim} \;}
+\newcommand{\plimni}{\underset{n \to \infty}{\plim} \;}
+\renewcommand{\lim}[1]{\underset{#1}{\operatorname{lim}} \;}
+
+\renewcommand{\lim}[1]{\underset{#1}{\operatorname{lim}} \;}
+\newcommand{\plim}[1]{\underset{#1}{\operatorname{plim}} \;}
+
+\renewcommand{\sup}[1]{\underset{#1}{sup} \;}
+\renewcommand{\inf}[1]{\underset{#1}{inf} \;}
+
+\renewcommand{\sup}[1]{\underset{#1}{\operatorname{sup}} \;}
+\renewcommand{\inf}[1]{\underset{#1}{\operatorname{inf}} \;}
+\newcommand{\limni}{\lim{n \to \infty} \;}
+\newcommand{\plimni}{\plim{n \to \infty} \;}
+\newcommand{\plimti}{\plim{t \to \infty} \;}
+
+\renewcommand{\max}[1]{\underset{#1}{\operatorname{max}} \;}
+\renewcommand{\min}[1]{\underset{#1}{min} \;}
+\renewcommand{\sup}[1]{\underset{#1}{\operatorname{sup}} \;}
+\renewcommand{\inf}[1]{\underset{#1}{\operatorname{inf}} \;}
+\renewcommand{\max}[1]{\underset{#1}{\operatorname{max}} \;}
+\renewcommand{\min}[1]{\underset{#1}{\operatorname{min}} \;}
+\newcommand{\bb }[1]{\bold  {#1}}
+\newcommand{\bs }[1]{\boldsymbol {#1}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Limiten, Summen andere Mengenoperatoren
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %\renewcommand{\lim}[1]{\underset{#1}{\operatorname{lim}} \;}
+    %\renewcommand{\sup}[1]{\underset{#1}{sup} \;}
+    %\renewcommand{\inf}[1]{\underset{#1}{inf} \;}
+    %\renewcommand{\max}[1]{\underset{#1}{\operatorname{max}} \;}
+    %\renewcommand{\min}[1]{\underset{#1}{min} \;}
+% in RTdefinitions2012: \newcommand{\plim}[1]{\underset{#1}{\operatorname{plim}} \;}
+\newcommand{\limni}{\lim_{n \to \infty} \;}
+\newcommand{\plimni}{\plim_{n \to \infty} \;}
+\newcommand{\plimti}{\plim_{t \to \infty} \;}
+\newcommand{\tsum}{\sum_{t=1}^T \;}
+\newcommand{\nsum}{\sum_{t=1}^T \;}
+%ROLF: in Folien_2013% \newcommand{\bb }[1]{\bold  {#1}}
+%ROLF: in Folien_2013% \newcommand{\bs }[1]{\boldsymbol {#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Umgebungen
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% a) b) c) Zähler in jeder Section durchlaufend
+\newcounter{abcd}[section]
+\newcommand{\bitabc}{\vspace{-1.8ex}\begin{enumerate}
+\renewcommand{\labelenumi}{\alph{abcd})}
+\itemsep-1.4ex \partopsep-1.8ex}
+\newcommand{\eitabc}{\end{enumerate}}
+\newcommand{\itabc}{\addtocounter{abcd}{1}\item}
+
+% Punkte
+\newcommand{\bitp}{\vspace{-1ex}\begin{itemize}
+\itemsep-0.6ex \partopsep-0.3ex}
+\newcommand{\eitp}{\end{itemize}}
+
+% Farbige Umgebungen für Hervorhebungen
+\newenvironment{fshaded}{\def\FrameCommand{\fcolorbox{framecolor}{shadecolor}}\MakeFramed{\FrameRestore}}{\endMakeFramed}
+%orange Umgebung
+\newenvironment{orangeumgebungs}[1][]{\definecolor{shadecolor}{rgb}{1,.8,.8}\definecolor{framecolor}{rgb}{1,0,0}\begin{fshaded}\begin{equation*}#1}{\end{equation*}\end{fshaded}}
+\newcommand{\bous}{\begin{orangeumgebungs}}
+\newcommand{\eous}{\end{orangeumgebungs}}
+
+%hellblaue Umgebung
+\newenvironment{blaueumgebungs}[1][]{\definecolor{shadecolor}{rgb}{.9,.9,1}%
+\definecolor{framecolor}{rgb}{.1,.0,.7}%
+\begin{fshaded}\begin{equation*}#1}{\end{equation*}\end{fshaded}}
+\newcommand{\bbus}{\begin{blaueumgebungs}}
+\newcommand{\ebus}{\end{blaueumgebungs}}
+
+\newenvironment{blaueumgebunge}[1][]{\definecolor{shadecolor}{rgb}{.9,.9,1}%
+\definecolor{framecolor}{rgb}{.1,.0,.7}%
+\begin{fshaded}\begin{enumerate}#1}{\end{enumerate}\end{fshaded}}
+\newcommand{\bbue}{\begin{blaueumgebunge}}
+\newcommand{\ebue}{\end{blaueumgebunge}}
+
+\newcommand{\formel}[1]{\begin{equation}\boxed{#1}\end{equation}}
+\newcommand{\formels}[1]{\begin{equation*}\boxed{#1}\end{equation*}}
+
+\newcommand{\beq}{\begin{equation}}
+\newcommand{\eeq}{\end{equation}}
+\newcommand{\beqs}{\begin{equation*}}
+\newcommand{\eeqs}{\end{equation*}}
+
+\newcommand{\bal}{\begin{align}}
+\newcommand{\eal}{\end{align}}
+\newcommand{\bals}{\begin{align*}}
+\newcommand{\eals}{\end{align*}}
+
+\newcommand{\bmat}{\begin{pmatrix}}
+\newcommand{\emat}{\end{pmatrix}}
+
+\newcommand{\bit}{\begin{itemize}}
+\newcommand{\eit}{\end{itemize}}
+\newcommand{\biit}{\begin{itemize}}
+\newcommand{\eiit}{\end{itemize}}
+
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\newcommand{\been}{\begin{enumerate}}
+\newcommand{\eeen}{\end{enumerate}}
+
+\newcommand{\bca}{\begin{cases}}
+\newcommand{\eca}{\end{cases}}
+
+\newcommand{\bpa}{\begin{parts}}
+\newcommand{\epa}{\end{parts}}
+
+\newcommand{\bspa}{\begin{subparts}}
+\newcommand{\espa}{\end{subparts}}
+
+\newcommand{\bso}{\begin{solution}}
+\newcommand{\eso}{\end{solution}}
+
+\newcommand{\argmax}[1]{\underset{#1}\operatorname{argmax}}
+\newcommand{\argmin}[1]{\underset{#1}\operatorname{argmin}}
+
+\newcommand{\argmax}[1]{\underset{#1}{\operatorname{arg}\,\operatorname{max}}\;} %did not work? { was missing!
+%\DeclareMathOperator*{\argmax}{arg\,max} % from tex.stackexchange.com
+\newcommand{\argmin}[1]{\underset{#1}{\operatorname{arg}\,\operatorname{min}}\;}
+\newcommand{\argmin}[1]{\underset{#1}{\operatorname{argmin}}}
+
+
+
+\definecolor{red}{rgb}{1,0,0}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\definecolor{green}{rgb}{0,1,0}
+\newcommand{\green}[1]{\textcolor{green}{#1}}
+\definecolor{blue}{rgb}{0,0,1}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}} 
+\definecolor{purple}{rgb}{1,0,1}
+\newcommand{\purple}[1]{\textcolor{purple}{#1}}
+\newcommand{\darkred}[1]{\textcolor{darkred}{#1}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% horizonalte Abstände
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\hd}{\hspace{3mm}}
+\newcommand{\hf}{\hspace{5mm}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% vertikale Abstände
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\vmd}{\hspace{3mm}}
+\newcommand{\vmf}{\hspace{5mm}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% roman numbers
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\RM}[1]{\MakeUppercase{\romannumeral #1{.}}} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% multi-part function definitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\twopartdef}[4]
+{
+	\left\{
+		\begin{array}{ll}
+			#1 & \mbox{if } #2 \\
+			#3 & \mbox{if } #4
+		\end{array}
+	\right.
+}
+\newcommand{\threepartdef}[6]
+{
+	\left\{
+		\begin{array}{ll}
+			#1 & \mbox{if } #2 \\
+			#3 & \mbox{if } #4 \\
+			#5 & \mbox{if } #6
+		\end{array}
+	\right.
+}
+\newcommand{\source}[1]{\caption*{Source: {#1}} }
