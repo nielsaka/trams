@@ -1,10 +1,11 @@
-PAPER_DIR = paper
-PAPER_DEP = paper/.paper.d
-.PHONY: init
+PAPER_DIR  = paper
+PAPER_FILE = article
+PAPER_DEP  = $(PAPER_DIR)/.paper.d
+.PHONY: init paper clean cleanall
 
 all: paper
 
-paper: paper/article.pdf
+paper: $(PAPER_DIR)/$(PAPER_FILE).pdf
 
 init: 
 	make -t
@@ -12,16 +13,15 @@ init:
 	make -t presentation
 	rm presentations/presentation.pdf
 
-paper/article.pdf: paper/article.tex
+$(PAPER_DIR)/$(PAPER_FILE).pdf: paper/$(PAPER_FILE).tex
 	latexmk -cd -pdf -deps-out=$(PAPER_DEP) $<
-	# exclude all non-project-specific dependencies
-	sed 's/article.pdf/paper\/article.pdf/' $(PAPER_DEP) > tmp.d
+	# write all project specific dependencies to $(PAPER_DEP)
+	sed 's/$(PAPER_FILE).pdf/$(PAPER_DIR)\/$(PAPER_FILE).pdf/' $(PAPER_DEP) > tmp.d
 	sed -n '1,2p' tmp.d > $(PAPER_DEP)
-	grep 'paper/inputs/' tmp.d >> $(PAPER_DEP)
-	rm tmp.d 
-	perl -pi -e 's/.*(?=paper\\/inputs)//' $(PAPER_DEP)
+	grep 'paper/inputs/' tmp.d >> $(PAPER_DEP); rm tmp.d
+	perl -pi -e 's/.*(?=$(PAPER_DIR)\\/inputs)/ /' $(PAPER_DEP)
 
-paper/inputs/%.tex: code/%.R
+$(PAPER_DIR)/inputs/%.tex: code/%.R
 	cd code; Rscript $*.R
 	
 clean: 
