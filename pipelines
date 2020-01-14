@@ -1,0 +1,38 @@
+############
+# Overview #
+############
+
+# Every line is one 'pipeline' that may produce several outputs.
+# The *_done files indicate whether pipeline has been executed.
+# These marker files are necessary since otherwise GNU make would
+# run certain processes multiple times and far more often that necessary.
+
+# marker files indicate whether pipeline has been executed
+output/DataCleaning%:   .DataCleaning_done ;
+
+
+##########
+# Detail #
+##########
+
+# If all that has to be done is execute the file, 
+# only the target and the dependencies need to be specified.
+
+output/DataCleaning_done: DataCleaning.R
+
+
+#######################
+# Simulation Settings #
+#######################
+
+# Decide on big or small simulation.
+# The option can be passed from the command line via 'make SIM=big'.
+# The default here is to use 2 cores and 2E3 repetitions.
+
+ifeq ($(SIM), big)
+  args = 28 2E6
+  args_lp_sim = 1E4
+else
+  args = 2 2E3
+  args_lp_sim = 1E2
+endif
