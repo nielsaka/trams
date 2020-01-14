@@ -2,7 +2,6 @@
 .Rproj.user
 .Rhistory
 .RData
-*.pdf
 *.html
 *.Rproj
 **.db
@@ -36,8 +35,9 @@ explorations/*_cache
 explorations/*_files
 explorations/*.tex
 
-# Exclude package build and .rds files
+# Exclude intermediate files
 **.rds
+*.pdf
 
 # EXCEPT .pdf files in input folder of paper, presentation, ..
 !**/input/*.pdf
