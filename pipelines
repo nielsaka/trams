@@ -3,36 +3,59 @@
 ############
 
 # Every line is one 'pipeline' that may produce several outputs.
-# The *_done files indicate whether pipeline has been executed.
-# These marker files are necessary since otherwise GNU make would
+# The *_done files indicate whether the pipeline has been executed.
+# These marker files are necessary as GNU make would otherwise
 # run certain processes multiple times and far more often that necessary.
 
 # marker files indicate whether pipeline has been executed
-output/DataCleaning%:   .DataCleaning_done ;
-
+output/euro_gdp_plot%:   .euro_gdp_plot_done ;
 
 ##########
 # Detail #
 ##########
 
-# If all that has to be done is execute the file, 
-# only the target and the dependencies need to be specified.
+# For '%done' and '%.rds' targets, if all that has to be done is
+# execute the first dependence, only the target and the dependencies
+# need to be specified.
 
-output/DataCleaning_done: DataCleaning.R
+# For example:
 
+output/.euro_gdp_plot_done: \
+	euro_gdp_draw_figure.R \
+	euro_gdp_clean.rds
+
+output/euro_gdp_clean.rds: \
+	euro_gdp_clean_data.R \
+	output/euro_gdp.rds
+
+# Note that the folder of the first .R dependency *must not* be declared.
+# The folders of other .R and .rds files are optional. If they are not 
+# specified, it will be assumed that any .R file is located in
+# `code/` and any .rds file in `output/`.
+# If that is not the case, you need to specify the rule manually.
+# Like this:
+
+output/euro_gdp.rds: code/euro_gdp_fetch_data.R
+	cd code; Rscript euro_gdp_fetch_data.R
+
+# The R code has been written under the assumption that `code/` is the
+# working directory, so you must always change directory first.
+# You can write your code differently and avoid changing dirs, but then you 
+# cannot rely on automatic rules and must always specify the complete rule#
+# as in the last example above.
 
 #######################
 # Simulation Settings #
 #######################
 
-# Decide on big or small simulation.
+# The beauty of GNU make is that you can pass arguments.
+# Here, we'll decide on whether to run a big or small simulation.
 # The option can be passed from the command line via 'make SIM=big'.
-# The default here is to use 2 cores and 2E3 repetitions.
+# If no arguemtn is passed, the default will be to use 2 cores 
+# and 2E3 repetitions.
 
 ifeq ($(SIM), big)
-  args = 28 2E6
-  args_lp_sim = 1E4
+  args_sim = 28 2E6
 else
-  args = 2 2E3
-  args_lp_sim = 1E2
+  args_sim = 2 2E3
 endif

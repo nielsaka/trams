@@ -12,13 +12,16 @@
 # Specify documents
 DOCs     = paper presentation
 
+# latexmk options
+LATEXMKOTPS = -use-make -pdf -g -f -e '$$max_repeat=9' -synctex=1
+
 # relative to project root
 OUT_DIR  = output/
 CODE_DIR = code/
 
 # (default) location of prerequisites
 vpath %.R $(CODE_DIR)
-vpath %_do $(OUT_DIR)
+vpath %_done $(OUT_DIR)
 vpath %.rds $(OUT_DIR)
 
 # relative to latex root (paper/ presentation/)
@@ -54,11 +57,6 @@ COPY_SUB_DIRs  = $(foreach a, $(ALL_SUB_DIRs), $(a)%)
 ALL_SUB_FILEs  = $(foreach a, $(ALL_SUB_DIRs), $(a)*)
 $(shell mkdir -p $(ALL_SUB_DIRs))
 
-# Miscellaneous #
-#---------------#
-
-# latexmk options
-LATEXMKOTPS = -use-make -pdf -g -f -e '$$max_repeat=9' -synctex=1
 
 #---------------------------- Rules ------------------------------------------#
 # Edit by hand
@@ -80,11 +78,14 @@ include pipelines
 	cd $(CODE_DIR); Rscript $(notdir $<)
 	touch $@
 
+%.rds:
+	cd $(CODE_DIR); Rscript $(notdir $<)
+
 
 # Make main targets - paper, presentation, supplement, ... #
 #----------------------------------------------------------#
 
-%_main.pdf: %_main.tex
+%_main.pdf: %_main.tex pipelines
 	cd $(@D); \
 	latexmk \
 		-deps-out=$(basename $(@F))$(DEP_FILE_END) \
@@ -142,7 +143,7 @@ reset: cleanall
 	rm $(ALL_SUB_FILEs) || true 
 # reset all by deleting all files in output and intermediary input folders;
 # -> allows to run complete analysis from scratch
-reset_all: reset
+resetall: reset
 	rm -r $(ALL_SUB_DIRs)
 	find output/ -maxdepth 1 -type f -not -name '.gitignore' -delete
 
