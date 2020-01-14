@@ -1,0 +1,134 @@
+%!TEX root = ../article.tex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Basic Settings (layout, typography, ...) %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Page layout in KOMA-script classes
+% Set page margins
+\usepackage[DIV=12]{typearea}
+ 
+% Language support
+% Configures date format and typographical rules depending on language
+\usepackage[british]{babel}
+
+% support colour output
+\usepackage{color}
+
+% % Translate encoding of input files
+% \usepackage[utf8]{inputenc}
+
+% % Select font encoding
+% % Hyphenation works for larger class of characters
+% \usepackage[T1]{fontenc}
+
+% % Support hyperlinks
+% \usepackage[colorlinks,citecolor=black,linkcolor=black,urlcolor=black]{hyperref}
+
+%%%%%%%%%%%%%%%%%
+% Math Notation %
+%%%%%%%%%%%%%%%%%
+
+% matrices, operators
+\usepackage{amsmath} 
+
+% more math symbols
+% e.g. \varnothing (nice empty set symbol)
+\usepackage{amssymb} 
+
+% proofs, \newtheorem*, definition style
+\usepackage{amsthm}  
+
+% aligned matrix entries (and other stuff)
+\usepackage{mathtools} 
+
+% bold math symbols (vectors, matrices)
+\usepackage{bm} 
+
+% Print centred \not command on other symbol 
+\usepackage{centernot}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Tables, Lists, Figure %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% nice line separators in tables
+\usepackage{booktabs}
+
+% used by kableExtra (+ others... !)
+\usepackage{array}
+
+% for the ability to [resume] enumerated lists
+\usepackage{enumitem}
+
+% include figures
+\usepackage{graphicx}
+
+% % for adjusting width of images included as PDFs
+% \usepackage[export]{adjustbox}
+
+% use the \caption* command for avoiding entry in List of Figures
+\usepackage{caption}
+%\captionsetup{font=bf}
+
+%%%%%%%%%%%%%%%%%%%%%
+% List of acronyms %
+%%%%%%%%%%%%%%%%%%%%%
+
+% Possible packages: 
+%  acronym		basic; does not sort alphabetically; more manual work
+%  acro
+%  glossary
+%  glossaries	most recent + flexible, but needs additional compilation
+%  nomencl		obsolete
+
+% Options for acronym:
+%  printonlyused	print only those acronyms which are used
+%  nolist			do not create a list of acronyms
+\usepackage[printonlyused, nolist]{acronym}
+
+%%%%%%%%%%%%%%
+% References %
+%%%%%%%%%%%%%%
+
+% allow a footnote style of author/affiliation input
+\usepackage{authblk}
+
+% Author-year reference style
+% Bibliography style
+\usepackage{natbib} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Standard Notation for Econometrics %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% % The 'econometrics' package implements a standard by
+% % Abadir and Magnus (2002).
+
+% \usepackage{econometrics} 
+
+% % Cannot use on debian, because texlive is outdated :-(
+% % I have texlive 2015 which cannot access CTAN database from 2016 onwards.
+
+%%%%%%%%%%%%%
+% Debugging %
+%%%%%%%%%%%%%
+
+% % Debugging Overfull \hbox etc.
+% % showframes draws border of type area
+% \usepackage{showframe}
+
+% Add todo notes which can be switched on/off
+% textsize=tiny		smaller text size
+% disable			do not show todonotes in document
+\usepackage[textsize=tiny, disable]{todonotes}
+
+
+%%%%%%%%%%%%%%
+% quotations %
+%%%%%%%%%%%%%%
+
+% % automatically adjust quotation marks depending on 
+% % language setting via babel package
+% \usepackage{csquotes}

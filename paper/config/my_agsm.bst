@@ -17,8 +17,7 @@
 %   Peter Williams, Key Centre for Design Quality, Sydney University
 %   e-mail: peterw@archsci.arch.su.oz.au
 
-% modified on ??.??.2013 by Niels Aka
-% to do what?
+% modified on by Niels Aka; 2013 - 2014
 
 % modified on 4.03.2014 by Niels Aka
 % to show "location: publisher" for books -> functions 

@@ -1,0 +1,27 @@
+% !TeX spellcheck = <none>
+\batchmode
+\documentclass[11pt,a4paper, notitlepage]{article}
+
+\input{config/packages}
+\input{config/definitions}
+\input{config/settings}
+
+\title{A Template for Reproducible Articles with GNU Make and Singularity}
+\author{Niels Aka}
+\affil{Insitute for the Advancement of Reproducibility (IAR), 10117 Berlin, Germany\\ Freie Universit\"at Berlin}
+\date{\today}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                          Begin Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\input{chapters/0_front}
+\input{chapters/1_intro}
+
+\input{chapters/90_conclusion}
+\input{chapters/900_appendix}
+
+\newpage
+\bibliography{config/lit_all}
+\end{document}

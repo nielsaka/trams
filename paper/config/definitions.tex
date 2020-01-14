@@ -1,0 +1,55 @@
+%!TEX root = ../article.tex
+
+%%%%%%%%%%%%%%%%
+% Econometrics %
+%%%%%%%%%%%%%%%%
+
+% Use the "econometrics" package by Erik Kole from 2016.
+% Based on proposal by Abadir and Magnus (2002).
+\input{config/econometrics.sty}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% definitions, lemmas, proposals, theorems, proofs %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% source: http://www.maths.tcd.ie/~dwilkins/LaTeXPrimer/Theorems.html
+% See also https://en.wikibooks.org/wiki/LaTeX/Theorems
+
+% Counting at chapter level. All have same counter.
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+% Assumption has its own counter.
+\newtheorem{assumption}{Assumption}[section]
+
+% Defintions switch to normal font, not italicised.
+\theoremstyle{definition} 
+\newtheorem{definition}{Definition}[section]
+\newtheorem{algorithm}{Algorithm}[section]
+
+% Examples and remarks are not numbered.
+\theoremstyle{remark}
+\newtheorem*{example}{Example}
+\newtheorem*{remark}{Remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% perpendicular symbol %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% https://tex.stackexchange.com/questions/79434/double-perpendicular-symbol-for-independence
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+\newcommand{\nindependent}{\centernot{\independent}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Miscellaneous Definitions %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% standard folder for images
+\newcommand{\graphdir}{./input/}
+
+% easy text colouring
+\newcommand{\chg}[1]{\textcolor{red}{#1}}
