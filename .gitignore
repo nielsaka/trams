@@ -1,12 +1,22 @@
+# R files
 .Rproj.user
 .Rhistory
 .RData
 *.pdf
 *.html
 *.Rproj
+**.db
 
 # Exclude latex help files
 **.aux
+**.cb
+**.cb2
+**.nav
+**.synctex
+**.synctex.gz
+**.snm
+**.toc
+**.out
 **.log
 **.bbl
 **.blg
@@ -17,3 +27,32 @@
 
 # Exclude jabref backup
 **.bak
+
+# Exclude miscellaneous files in "misc" folder
+misc/
+
+# Exclude auxiliary files and folders in exploration folder
+explorations/*_cache
+explorations/*_files
+explorations/*.tex
+
+# Exclude package build and .rds files
+**.rds
+
+# EXCEPT .pdf files in input folder of paper, presentation, ..
+!**/input/*.pdf
+
+# EXCEPT paper and presentation
+!**/paper/*.pdf
+!**/presentation/*.pdf
+
+# Exclude user-specific sublime text editor files
+*.sublime-workspace
+
+# Exclude singularity sandbox containers
+container/
+*.sqfs
+
+# Exclude old files in "archive" folders
+**/archive/
+
