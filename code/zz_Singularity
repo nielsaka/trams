@@ -1,0 +1,54 @@
+# This definition file may be useful if the singularity container is not based
+# on a docker container. In that case the header below would have to be
+# adapted. 
+# 
+# In general, the reproducibility of a singularity container is greater than
+# a docker container that relies on other containers, since the latter may 
+# change and affect the final results.
+
+Bootstrap: docker
+From: rocker/verse:3.3.3
+
+%setup
+    # copy local R package to container
+    # cp -R code/package /tmp/
+
+%runscript
+    make
+
+%files
+    # will only be copied after %post is run
+    # code/package/NAMESPACE /opt/NAMESPACE
+
+%post
+    export LC_ALL=C
+    apt-get update
+
+    ##############
+    # R packages #
+    ##############    
+
+    # cannot install debian packages (e.g. r-bioc-rbgl) as they depend on r-base...
+    Rscript -e 'install.packages(c("graph"),  repos = "http://bioconductor.org/packages/3.3/bioc/")'
+    Rscript -e 'install.packages(c("doRNG"))' # if MRAN is down, add `repos = "https://cloud.r-project.org/"`
+
+    # install local R package
+    # Rscript -e 'install.packages("/tmp/package/", repos = NULL)'
+
+    #########
+    # LaTeX #
+    #########
+
+    # bibliography uses humannat.bst in texlive-bibtex-extra; could install .bst manually?
+    # latexmk not included in rocker/verse
+    apt-get install -y texlive-bibtex-extra latexmk
+
+    # manually add bbm.sty for bold math symbols (texlive-fonts-extra is huge)
+    cd /usr/share/texlive/texmf-dist/tex/latex/
+    wget http://mirrors.ctan.org/macros/latex/contrib/bbm.zip
+    unzip bbm.zip
+    rm *.zip
+
+    cd bbm
+    latex bbm.ins
+    texhash
