@@ -18,5 +18,9 @@ fi
 # differentiate between remaking complete paper (including big simulation)
 # or building from intermediate results?
 
-singularity exec "$IMAGE" make paper
+# bind current working dir to $HOME; 
+# otherwise reproducibility is much diminished!
+# will access R packages and binaries...
+
+singularity exec --bind $PWD:$HOME "$IMAGE" make paper
 
