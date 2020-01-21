@@ -1,26 +1,45 @@
 #!/bin/sh
 
+REPO="nielsaka"
 IMAGE="trams"
 REMOTE_IMAGE="trams"
 
-# pull or build image if not available
-if docker images | grep --quiet $IMAGE ; then
-	echo "$IMAGE image exists"
-else
-	echo "$IMAGE image DOES NOT exist"
+BUILD=$1
+
+exists_docker () {
+	docker images | grep --quiet "$IMAGE"
+}	
+
+pull_docker () {
 	echo "pulling image from dockerhub"
-	docker pull nielsaka/"$REMOTE_IMAGE"
-	docker tag nielsaka/"$REMOTE_IMAGE" "$IMAGE"
-	if docker images | grep --quiet "$IMAGE" ; then
-		echo "$IMAGE container successfully created"
+	docker pull $REPO/"$REMOTE_IMAGE"
+	docker tag $REPO/"$REMOTE_IMAGE" "$IMAGE"
+	if exists_docker; then
+		echo "$IMAGE image successfully pulled"
 	else
-		echo "failed to pull container"
-		echo "building from Dockerfile"
-		docker build -t "$IMAGE" .
-		if ! docker images | grep --quiet "$IMAGE" ; then
-			echo "failed to pull or build container"
-			exit 1
-		fi
+		echo "failed to pull image"
+	fi
+}
+
+build_docker () {
+	echo "building from Dockerfile"
+	docker build -t "$IMAGE" .
+	if exists_docker; then
+		echo "$IMAGE image successfully built"
+	else
+		echo "failed to build image"
+	fi
+}
+
+if [ "$BUILD" = "local" ]; then
+	build_docker
+fi
+
+if ! exists_docker; then
+	echo "$IMAGE does not exist"
+	pull_docker;
+	if ! exists_docker; then
+		build_docker
 	fi
 fi
 
@@ -33,6 +52,7 @@ docker run \
 	-i	\
 	-v $(pwd):/home/$IMAGE \
 	-w /home/$IMAGE \
+	-u $(id -u ${USER}):$(id -g ${USER}) \
 	$IMAGE \
-	make	
+	make paper	
 

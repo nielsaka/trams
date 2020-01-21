@@ -38,6 +38,18 @@
 # chances to get scheduled to 'fill in the gaps' between other
 # jobs. 
 #
+# Set quality of service (if required by server). Will affect
+# job priority as well.
+#
+#SBATCH --qos=short
+#
+# Options include (at FU Berlin server)
+#       Name   Priority     MaxWall MaxJobs MaxSubmit     MaxTRESPU 
+# ---------- ---------- ----------- ------- --------- ------------- 
+#     short     100000     03:00:00      50       100       cpu=160 
+#     medium      1000   3-00:00:00     500      1000       cpu=800 
+#     long           0  14-00:00:00    3000     10000      cpu=3000 
+#
 ##################################################################
 # Requested number of cores. Choose either of, or both of
 #
