@@ -21,6 +21,7 @@ RUN apt-get update \
 	&& install2.r \
 		# for fetching data from ECB SDW
 		ecb \
+		tictoc \
 ################
 # tex packages #
 ################
