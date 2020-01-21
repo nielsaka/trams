@@ -22,6 +22,7 @@ RUN apt-get update \
 		# for fetching data from ECB SDW
 		ecb \
 		tictoc \
+		doFuture \
 ################
 # tex packages #
 ################

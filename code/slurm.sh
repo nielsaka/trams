@@ -53,7 +53,7 @@
 ##################################################################
 # Requested number of cores. Choose either of, or both of
 #
-#SBATCH --ntasks=1
+#SBATCH --ntasks=4
 #SBATCH --cpus-per-task=1
 #
 # Set a (ntasks) to be the number of process you want to launch and
