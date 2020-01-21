@@ -113,8 +113,10 @@
 # 
 ### Simple sequential job
 # If you have a simple non-parallel job, just launch it. 
-# So if it is called myprog.exe, just write :
+# Here, we'll use our singularity container called 'trams.sif'
+# as our computing environment.
 
+module add Singularity
 singularity exec trams.sif make paper
 
 # ./myprog.exe

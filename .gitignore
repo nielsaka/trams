@@ -49,9 +49,10 @@ explorations/*.tex
 # Exclude user-specific sublime text editor files
 *.sublime-workspace
 
-# Exclude singularity sandbox containers
+# Exclude singularity containers
 container/
 *.sqfs
+*.sif
 
 # Exclude old files in "archive" folders
 **/archive/
