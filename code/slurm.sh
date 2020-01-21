@@ -26,7 +26,7 @@
 ##################################################################
 # The requested run-time
 #
-#SBATCH --time=10
+#SBATCH --time=25
 # Acceptable time formats include "minutes", "minutes:seconds", 
 # "hours:minutes:seconds", "days-hours", "days-hours:minutes" 
 # and "days-hours:minutes:seconds"
