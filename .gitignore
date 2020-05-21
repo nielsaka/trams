@@ -19,6 +19,7 @@
 **.log
 **.bbl
 **.blg
+**.dep
 
 # Exclude make / latexmk help files
 **.fdb_latexmk
@@ -56,4 +57,7 @@ container/
 
 # Exclude old files in "archive" folders
 **/archive/
+
+# vim 
+*.swp
 
