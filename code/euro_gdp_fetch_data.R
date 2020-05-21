@@ -4,7 +4,7 @@ saveRDS(gdp, file = "../output/euro_gdp.rds")
 
 library(doFuture)
 registerDoFuture()
-cl <- makeCluster(4)
+cl <- makeCluster(10)
 plan(cluster, workers = cl)
 
 R <- 20

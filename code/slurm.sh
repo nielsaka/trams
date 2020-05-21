@@ -41,19 +41,18 @@
 # Set quality of service (if required by server). Will affect
 # job priority as well.
 #
-#SBATCH --qos=short
+#SBATCH --qos=hiprio
 #
 # Options include (at FU Berlin server)
-#       Name   Priority     MaxWall MaxJobs MaxSubmit     MaxTRESPU 
-# ---------- ---------- ----------- ------- --------- ------------- 
-#     short     100000     03:00:00      50       100       cpu=160 
-#     medium      1000   3-00:00:00     500      1000       cpu=800 
-#     long           0  14-00:00:00    3000     10000      cpu=3000 
-#
+#      Name   Priority     MaxWall MaxJobs MaxSubmit     MaxTRESPU 
+#---------- ---------- ----------- ------- --------- ------------- 
+#    hiprio     100000    03:00:00      50       100       cpu=160 
+#      prio       1000  3-00:00:00     500      1000       cpu=800 
+#  standard          0 14-00:00:00    3000     10000      cpu=1600 
 ##################################################################
 # Requested number of cores. Choose either of, or both of
 #
-#SBATCH --ntasks=4
+#SBATCH --ntasks=10
 #SBATCH --cpus-per-task=1
 #
 # Set a (ntasks) to be the number of process you want to launch and
